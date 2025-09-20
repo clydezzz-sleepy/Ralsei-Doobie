@@ -24,3 +24,5 @@ Happy... doobie! :3
 
 
 (* ALL YOUR RALSEI,  [[Abandoned you for The Doobies]] YOU ARE?)
+
+(Note: this is an extremely unserious project, please don't mind me if I joke around a little.)
