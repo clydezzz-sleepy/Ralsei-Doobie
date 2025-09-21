@@ -34,6 +34,7 @@ Doing this manually will restore the correct folder name so the program can find
 Happy... doobie! :3
 
 (* ALL YOUR RALSEI, [[Abandoned you for The Doobies]] YOU ARE?)
+(* The power of The Doobie fills you with DETERMINATION.)
 
 (Note: this is an extremely unserious project, please don't mind me if I joke around a little.)
 
@@ -87,17 +88,23 @@ Googleドライブなどのクラウドサービスで経験したバグがあ�
 
 (* ともだち　みな
 　 かまってくれnai　　か
-　 ｱnﾀ　[[ｼﾞｭｰﾋﾞｰ]]　ｷﾓいから？)
+　 ｱnﾀ　[[ﾄﾞｩ―ﾋﾞｰ]]　ｷﾓいから？)
+
+（*ドゥービーの力はあなたに強い決意を与えてくれる。）
 
 （注意：これはとてもふざけたプロジェクトなので、冗談が混ざっていても気にしないでくださいね。）
 
 ---
 
-![Screenshot 1](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_1.png?raw=true)
-A regular screenshot of the Doobie Ralsei desktop pet on top of Deltarune.
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_1.png?raw=true)
+(A regular screenshot of the Doobie Ralsei desktop pet on top of Deltarune.)
 
-![Screenshot 2](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_2.png?raw=true)
-デルタランヌの画面上に表示される、Doobie Ralseiデスクトップペットのもう1枚のスクリーンショット。
+（デルタランヌの画面上に表示される、Doobie Ralseiデスクトップペットのスクリーンショット。）
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_2.png?raw=true)
+(Another regular screenshot of the Doobie Ralsei desktop pet on top of Deltarune.)
 
-![Screenshot 3](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_3.png?raw=true)
-通常のデスクトップ画面上に表示される、Doobie Ralseiデスクトップペットのスクリーンショット。
+（デルタランヌの画面上に表示される、Doobie Ralseiデスクトップペットのもう1枚のスクリーンショット。）
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_3.png?raw=true)
+(A screenshot of the Doobie Ralsei desktop pet on a general desktop.)
+
+（通常のデスクトップ画面上に表示される、Doobie Ralseiデスクトップペットのスクリーンショット。）
