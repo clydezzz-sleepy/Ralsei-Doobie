@@ -2,6 +2,8 @@
 
 A silly little desktop companion project featuring Doobie Ralsei. Just for fun! (Don't take over his extreme smoking addiction, though...)
 
+![Doobie!](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Ralsei_Shimeji/assets%20;p/ralsei_doobieee.png?raw=true)
+
 ## About
 Hello, there! I am 'clydezzz-sleepy' on GitHub (the creator of this little curse), I'm glad to have you read this, even if that might not be required.
 I'm content to have you use this little project of mine, even if it may have no physical use whatsoever. It's just something I liked making in the meantime, that's all!
