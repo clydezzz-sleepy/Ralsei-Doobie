@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Ralsei_Shimeji
 {
-    public partial class Form1: Form
+    public partial class RalseiDoobie : Form
     {
-        public Form1()
+        public RalseiDoobie()
         {
             InitializeComponent();
         }
