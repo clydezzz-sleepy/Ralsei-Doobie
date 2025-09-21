@@ -68,3 +68,13 @@ Googleドライブなどのクラウドサービスで経験したバグがあ�
 　 ｱnﾀ　[[ｼﾞｭｰﾋﾞｰ]]　ｷﾓいから？)
 
 （注意：これはとてもふざけたプロジェクトなので、冗談が混ざっていても気にしないでくださいね。）
+
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_1.png?raw=true)
+(A regular screenshot of the Doobie Ralsei desktop pet on top of Deltarune.)
+（デルタランヌの画面上に表示される、Doobie Ralseiデスクトップペットのスクリーンショット。）
+
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_2.png?raw=true)
+（デルタランヌの画面上に表示される、Doobie Ralseiデスクトップペットのもう1枚のスクリーンショット。）
+
+![](https://github.com/clydezzz-sleepy/Ralsei-Doobie/blob/main/Screenshot_3.png?raw=true)
+（通常のデスクトップ画面上に表示される、Doobie Ralseiデスクトップペットのスクリーンショット。）
