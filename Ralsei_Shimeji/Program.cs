@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using WMPLib;
 
@@ -54,7 +55,7 @@ namespace WinRalseiShimeji
                 Text = message,
                 Location = new Point(15, 20),
                 AutoSize = true,
-                MaximumSize = new Size(320, 0),
+                MaximumSize = new Size(420, 0),
                 TextAlign = ContentAlignment.MiddleCenter
             };
             this.Controls.Add(labelMsg);
@@ -233,13 +234,16 @@ namespace WinRalseiShimeji
         #pragma warning restore IDE1006 // Ehh... it can chill now. :3
         #endif
         private readonly static string userProfile = Environment.GetEnvironmentVariable("USERPROFILE");
-        private readonly string assetPath = Path.Combine(
+        private readonly static string assetPath = Path.Combine(
             userProfile,
             "Downloads",
             "Ralsei_Shimeji",
             "Ralsei_Shimeji",
             "assets ;p"
         );
+        private string musicUrl = Path.Combine(assetPath, "dump.mp3");
+        private bool isUsingCustomMusic = false;
+        private bool suppressCustomMusicPromptOnce = false;
 
         private readonly int TBOK = 1;
         private readonly int TBDSA = 2;
@@ -473,19 +477,29 @@ namespace WinRalseiShimeji
             };
             musicStopMenuItem.Click += (s, e) => { StopMusic(); };
             ralseiMenu.Items.Add(musicStopMenuItem);
+            /////////////////////////////////////////////////////////////
+            var customMusicMenuItem = new ToolStripMenuItem("Play Custom Music")
+            {
+                ShortcutKeys = Keys.Control | Keys.C | Keys.M,
+                ShortcutKeyDisplayString = "Ctrl + C + M"
+            };
+            customMusicMenuItem.Click += (s, e) => { CustomMusic(); };
+            ralseiMenu.Items.Add(customMusicMenuItem);
 
             ralseiMenu.Items.Add(new ToolStripSeparator());
 
             var trackMouseMenuItem = new ToolStripMenuItem("Make Ralsei Track The Mouse")
             {
-                ShortcutKeys = Keys.Control | Keys.Shift | Keys.T
+                ShortcutKeys = Keys.Control | Keys.Shift | Keys.T,
+                ShortcutKeyDisplayString = "Ctrl + Shift + T"
             };
             trackMouseMenuItem.Click += (s, e) => { ralseiIsFollowingMouse = true; };
             ralseiMenu.Items.Add(trackMouseMenuItem);
             ////////////////////////////////////////////////////////////////////////////////
             var untrackMouseMenuItem = new ToolStripMenuItem("Make Ralsei Un-track The Mouse")
             {
-                ShortcutKeys = Keys.Control | Keys.Alt | Keys.T
+                ShortcutKeys = Keys.Control | Keys.Alt | Keys.T,
+                ShortcutKeyDisplayString = "Ctrl + Alt + T"
             };
             untrackMouseMenuItem.Click += (s, e) => { ralseiIsFollowingMouse = false; };
             ralseiMenu.Items.Add(untrackMouseMenuItem);
@@ -558,7 +572,8 @@ namespace WinRalseiShimeji
 
             var ralsDraggableMenuItem = new ToolStripMenuItem("Make Ralsei Draggable")
             {
-                ShortcutKeys = Keys.Control | Keys.Shift | Keys.D
+                ShortcutKeys = Keys.Control | Keys.Shift | Keys.D,
+                ShortcutKeyDisplayString = "Ctrl + Shift + D"
             };
             ralsDraggableMenuItem.Click += (s, e) => { draggable = true; MessageBox.Show("Toss me around as much as you want! " +
                 "I would be lying if I were to say that I don't enjoy some action...", "Message From Doobie Ralsei", MessageBoxButtons.OK); };
@@ -853,14 +868,25 @@ namespace WinRalseiShimeji
             }
         }
 
-        private void PlayMusic()
+        private void PlayMusic(bool promptIfCustomSet = true)
         {
             if (!RalseiManager.MusicIsPlaying)
             {
                 wplayer = new WindowsMediaPlayer
                 {
-                    URL = Path.Combine(assetPath, "dump.mp3")
+                    URL = musicUrl
                 };
+                if (wplayer.URL != Path.Combine(assetPath, "dump.mp3") && isUsingCustomMusic && promptIfCustomSet)
+                {
+                    DialogResult result = MessageBox.Show("Custom music is currently in queue, do you want to play the default music instead? ^^ " +
+                        "(You'll always be able to add custom music back again!)",
+                        "TEAR DOWN MY KIDS!! TEAR ME DOWN!! (Can I say that on TV..?)", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        wplayer.URL = Path.Combine(assetPath, "dump.mp3");
+                        isUsingCustomMusic = false;
+                    }
+                }
                 wplayer.settings.setMode("loop", true);
                 wplayer.controls.play();
                 RalseiManager.MusicIsPlaying = true;
@@ -876,6 +902,27 @@ namespace WinRalseiShimeji
                 RalseiManager.MusicIsPlaying = false;
             }
         }
+
+        private void CustomMusic()
+        {
+            OpenFileDialog fileUrl = new OpenFileDialog();
+            fileUrl.Filter = "Audio Files|*.mp3;*.wav;*.ogg;*.wma;*.flac;*.m4a;*.aac|All Files|*.*";
+            if (fileUrl.ShowDialog() == DialogResult.OK)
+            {
+                musicUrl = fileUrl.FileName;
+                isUsingCustomMusic = true;
+                if (wplayer != null)
+                {
+                    if (RalseiManager.MusicIsPlaying)
+                    {
+                        wplayer.controls.stop();
+                        RalseiManager.MusicIsPlaying = false;
+                    }
+                }
+                PlayMusic(false);
+            }
+        }
+
 
         public static void ShowControls()
         {
@@ -896,7 +943,9 @@ namespace WinRalseiShimeji
                 "\n\n- Ctrl + Shift + M: This plays Doobie Ralsei's music (032 - Dump by Toby Fox, originating in DELTARUNE, Chapter 3(+4)). " +
                 "like the rest, you should press these keys after each other." +
                 "\n- Ctrl + Alt + M: This stops the music currently playing (if the song is playing in the current). " +
-                "This works exactly like Ctrl + Alt + T, for clarification." +
+                "This works exactly like Ctrl + Alt + T, for clarification. " +
+                "\nCtrl + C + M: This gives you the ability to replace the default music with your own sound file (usually .mp3, .ogg or .wav). If you'd rather listen to " +
+                "something groovy and NEVER glooby, then feel free to change it whenever you'd like! ^^" +
                 "\n\nCtrl + Shift + S: This spawns a new Ralsei Doobie instance. This is a separate window that gets layered over your previous Ralsei Doobie instance, " +
                 "this key is quite anti-performant and might cause latency or even personal issues if done excessively. Please be cautioned about this." +
                 "\n(Also, one small thing, in order to focus your preferred Doobie Ralsei instance on the screen is to simply click the image of the instance " +
@@ -909,7 +958,7 @@ namespace WinRalseiShimeji
                 "the Ralsei Doobie instance on the screen that you want to select and to manually click 'Exit' on your preferred Ralsei Doobie instance(s)." +
                 "\n\n\nAlso, my creator told me to share this with you: \"Happy Doobie, just like always! I hope you find my silly little creation (named 'Ralsei-Doobie' on GitHub) " +
                 "somewhat entertainable! ^-^'\"" +
-                "\n\n- Clyde (also TRS or 'clydezzz-sleepy' on GitHub!)" +
+                "\n\n- Clyde (also TRS (Team Rainy Spiritual) or 'clydezzz-sleepy' on GitHub!)" +
                 "\n(今後も幸運を祈っています、えへへ～)",
                 "EVERYTHING IN THIS [$4.99 Life] NEEDS [TASTY KROMER]", "Thank you, got everything noted! :3"))
             {
@@ -1010,6 +1059,11 @@ namespace WinRalseiShimeji
             else if (keyData.HasFlag(Keys.Control) && keyData.HasFlag(Keys.Alt) && keyData.HasFlag(Keys.M))
             {
                 StopMusic();
+                return true;
+            }
+            else if (keyData.HasFlag(Keys.Control) && keyData.HasFlag(Keys.C) && keyData.HasFlag(Keys.M))
+            {
+               CustomMusic();
                 return true;
             }
             else if (keyData.HasFlag(Keys.Control) && keyData.HasFlag(Keys.Shift) && keyData.HasFlag(Keys.S))
